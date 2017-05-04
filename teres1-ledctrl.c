@@ -11,11 +11,15 @@
    GNU General Public License for more details.
  */
 
+
 #include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include <linux/input.h>
+
+#define LED_CAPS	71
+#define LED_NUM		68
 
 void export_gpio(int gpio)
 {
@@ -71,8 +75,9 @@ int main (int argc, char **argv)
     exit(255);
   }
 
-  export_gpio(229);
-  export_gpio(231);
+  export_gpio(LED_NUM);
+  export_gpio(LED_CAPS);
+
 
   while(read(fd, &ie, sizeof(struct input_event)))
   {
@@ -82,11 +87,11 @@ int main (int argc, char **argv)
       switch (ie.code) {
       case 0: // LED_NUML
         printf("type %d\tcode %d\tvalue %d\n", ie.type, ie.code, ie.value);
-        set_gpio(229, ie.value);
+        set_gpio(LED_NUM, ie.value);
         break;
       case 1: // LED_CAPSL
         printf("type %d\tcode %d\tvalue %d\n", ie.type, ie.code, ie.value);
-        set_gpio(231, ie.value);
+        set_gpio(LED_CAPS, ie.value);
         break;
       }
       break;
