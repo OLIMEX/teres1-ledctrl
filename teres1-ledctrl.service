@@ -3,7 +3,7 @@ Description=teres1-ledctrl
 After=basic.target
 
 [Service]
-ExecStart=/usr/bin/teres1-ledctrl /dev/input/by-id//usb-Olimex_Ltd._TERES_Keyboard+Touchpad_8413335303835191A1F0-event-kbd
+ExecStart=/usr/bin/teres1-ledctrl /dev/input/by-path/platform-1c1b000.ehci1-controller-usb-0:1.4:1.0-event-kbd
 TimeoutStopSec=1
 Restart=always
 RestartSec=5
