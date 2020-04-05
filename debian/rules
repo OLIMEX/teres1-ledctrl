@@ -3,3 +3,8 @@
 %:
 	dh $@ --with=systemd
 
+override_dh_auto_build:
+	$(MAKE) CC=$(CC)
+
+override_dh_auto_install:
+	$(MAKE) CC=$(CC) install
