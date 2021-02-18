@@ -46,19 +46,19 @@ package:merge:
 deploy:staging:
   stage: deploy
   script:
-    - reprepro -b /var/www/html/staging --ignore=wrongdistribution includedeb buster build/teres1-ledctrl*.deb
-    - reprepro -b /var/www/html/staging --ignore=wrongdistribution includedeb bionic build/teres1-ledctrl*.deb
-    - reprepro -b /var/www/html/staging --ignore=wrongdistribution includedeb focal build/teres1-ledctrl*.deb
-    - reprepro -b /var/www/html/staging --ignore=wrongdistribution includedeb sid build/teres1-ledctrl*.deb
+    - |
+      for repo in $REPOS ; do
+        reprepro -b /var/www/html/staging --ignore=wrongdistribution includedeb $repo build/teres1-ledctrl*.deb
+      done
   tags:
     - deploy
 
 deploy:repository:
   stage: deploy
   script:
-    - reprepro -b /var/www/html/repository --ignore=wrongdistribution includedeb buster build/teres1-ledctrl*.deb
-    - reprepro -b /var/www/html/repository --ignore=wrongdistribution includedeb bionic build/teres1-ledctrl*.deb
-    - reprepro -b /var/www/html/repository --ignore=wrongdistribution includedeb focal build/teres1-ledctrl*.deb
-    - reprepro -b /var/www/html/repository --ignore=wrongdistribution includedeb sid build/teres1-ledctrl*.deb
+    - |
+      for repo in $REPOS ; do
+        reprepro -b /var/www/html/repository --ignore=wrongdistribution includedeb $repo build/teres1-ledctrl*.deb
+      done
   tags:
     - deploy
